@@ -1,0 +1,47 @@
+% One Dimensional Diffusion Equation
+% af/at=a2f/ax2
+
+clear all; clc; close all;
+n=21;
+L=1.0; 
+h=L/(n-1);
+
+
+
+xsp=0:h:L;
+
+finaltime=0.2;
+
+dt=0.001; 
+D=1;
+
+
+time=0.0;
+
+for i=1:n 
+    f(i)=sin(pi*xsp(i)/2); 
+end; % initial conditions
+
+while (time<finaltime)
+
+  time;
+    
+  y=f; % store the solution
+  for i=2:n-1,
+    f(i)=y(i)+D*(dt/h^2)*(y(i+1)-2*y(i)+y(i-1)); % advect by centered differences
+  end;  
+  time=time+dt;
+  
+  f(1)=0;
+  f(n)=1;
+  
+  plot(xsp,f)
+  axis([0 1 0 1])
+  
+  
+  pause(0.001)
+  
+  
+end;
+plot(xsp,f)
+  axis([0 1 0 1])
